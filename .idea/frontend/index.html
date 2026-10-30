@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1020">
+
+    <title>Nghịch Thiên Chiến Ký</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div id="game-app" class="game-app">
+
+    <!-- THANH ĐIỀU HƯỚNG -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-symbol">逆</div>
+
+            <div class="brand-text">
+                <h2>NGHỊCH THIÊN</h2>
+                <span>CHIẾN KÝ</span>
+            </div>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <nav class="main-navigation" aria-label="Điều hướng chính">
+            <button
+                    type="button"
+                    class="nav-item active"
+                    data-view="home"
+            >
+                <span class="nav-icon">⌂</span>
+                <span class="nav-label">Đại điện</span>
+            </button>
+
+            <button
+                    type="button"
+                    class="nav-item"
+                    data-view="campaign"
+            >
+                <span class="nav-icon">⚔</span>
+                <span class="nav-label">Chiến dịch</span>
+            </button>
+
+            <button
+                    type="button"
+                    class="nav-item"
+                    data-view="heroes"
+            >
+                <span class="nav-icon">♟</span>
+                <span class="nav-label">Tướng lĩnh</span>
+            </button>
+
+            <button
+                    type="button"
+                    class="nav-item"
+                    data-view="formation"
+            >
+                <span class="nav-icon">▦</span>
+                <span class="nav-label">Đội hình</span>
+            </button>
+
+            <button
+                    type="button"
+                    class="nav-item"
+                    data-view="inventory"
+            >
+                <span class="nav-icon">◈</span>
+                <span class="nav-label">Túi đồ</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="server-status">
+                <span id="connection-indicator" class="status-dot"></span>
+                <span id="connection-status">Chưa kết nối máy chủ</span>
+            </div>
+
+            <button
+                    type="button"
+                    id="open-settings"
+                    class="settings-button"
+            >
+                ⚙ Cấu hình máy chủ
+            </button>
+        </div>
+    </aside>
+
+
+    <!-- NỘI DUNG CHÍNH -->
+    <main class="main-area">
+
+        <!-- THANH TRÊN -->
+        <header class="topbar">
+            <div class="page-heading">
+                <span class="eyebrow">
+                    THIÊN ĐẠO VÔ TÌNH · CƯỜNG GIẢ VI TÔN
+                </span>
+
+                <h1 id="page-title">Đại điện</h1>
+            </div>
+
+            <div class="account-area">
+                <div class="currency-item">
+                    <span class="currency-icon">✦</span>
+
+                    <div>
+                        <span class="currency-label">LINH THẠCH</span>
+                        <strong id="premium-currency">—</strong>
+                    </div>
+                </div>
+
+                <div class="currency-item">
+                    <span class="currency-icon">◉</span>
+
+                    <div>
+                        <span class="currency-label">LƯỢNG VÀNG</span>
+                        <strong id="gold">—</strong>
+                    </div>
+                </div>
+
+                <button
+                        type="button"
+                        id="auth-button"
+                        class="button button-outline"
+                >
+                    Đăng nhập
+                </button>
+            </div>
+        </header>
+
+
+        <!-- MÀN HÌNH ĐẠI ĐIỆN -->
+        <section id="view-home" class="game-view active">
+
+            <section class="hero-banner">
+                <div class="hero-banner-content">
+
+                    <div class="banner-label">
+                        <span class="status-dot"></span>
+                        HÀNH TRÌNH TU LUYỆN
+                    </div>
+
+                    <h2 class="banner-title">逆天而行</h2>
+
+                    <h3 class="banner-subtitle">
+                        Nghịch Thiên Chiến Ký
+                    </h3>
+
+                    <p class="banner-description">
+                        Con đường nghịch thiên, lấy chiến chứng đạo.
+                    </p>
+
+                    <button
+                            type="button"
+                            class="button button-gold"
+                            data-go="campaign"
+                    >
+                        Tiến vào chiến dịch
+                        <span>↗</span>
+                    </button>
+                </div>
+
+                <div class="banner-seal" aria-hidden="true">
+                    <span>天</span>
+                    <small>ĐẠO</small>
+                </div>
+
+                <div class="mountain mountain-back" aria-hidden="true"></div>
+                <div class="mountain mountain-front" aria-hidden="true"></div>
+            </section>
+
+
+            <!-- THÔNG TIN NHÂN VẬT -->
+            <section class="dashboard-section">
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">HÀNH TRÌNH CỦA NGƯỜI</span>
+                        <h2>Tu luyện nhật ký</h2>
+                    </div>
+
+                    <span class="muted-text">Dữ liệu nhân vật</span>
+                </div>
+
+                <div class="player-stat-grid">
+                    <article class="player-stat-card">
+                        <div class="stat-icon">♙</div>
+
+                        <div class="stat-content">
+                            <span class="stat-label">ĐẠO HẠNH</span>
+                            <strong id="player-level">—</strong>
+                            <span class="stat-description">
+                                Cấp độ hiện tại
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="player-stat-card">
+                        <div class="stat-icon">✧</div>
+
+                        <div class="stat-content">
+                            <span class="stat-label">KINH NGHIỆM</span>
+                            <strong id="player-exp">—</strong>
+                            <span class="stat-description">
+                                EXP tích lũy
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="player-stat-card">
+                        <div class="stat-icon">⚔</div>
+
+                        <div class="stat-content">
+                            <span class="stat-label">CHIẾN DỊCH</span>
+                            <strong id="campaign-count">—</strong>
+                            <span class="stat-description">
+                                Số ải đang hoạt động
+                            </span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+
+            <!-- LỐI VÀO CÁC TÍNH NĂNG -->
+            <section class="dashboard-section">
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">BẮT ĐẦU HÀNH TRÌNH</span>
+                        <h2>Khám phá thế giới</h2>
+                    </div>
+                </div>
+
+                <div class="feature-grid">
+
+                    <button
+                            type="button"
+                            class="feature-card"
+                            data-go="campaign"
+                    >
+                        <span class="feature-icon">⚔</span>
+
+                        <span class="feature-content">
+                            <strong>Chiến dịch</strong>
+                            <small>Chinh phục từng cửa ải</small>
+                        </span>
+
+                        <span class="feature-arrow">↗</span>
+                    </button>
+
+                    <button
+                            type="button"
+                            class="feature-card"
+                            data-go="heroes"
+                    >
+                        <span class="feature-icon">♟</span>
+
+                        <span class="feature-content">
+                            <strong>Tướng lĩnh</strong>
+                            <small>Quản lý tướng sở hữu</small>
+                        </span>
+
+                        <span class="feature-arrow">↗</span>
+                    </button>
+
+                    <button
+                            type="button"
+                            class="feature-card"
+                            data-go="formation"
+                    >
+                        <span class="feature-icon">▦</span>
+
+                        <span class="feature-content">
+                            <strong>Bố trận</strong>
+                            <small>Sắp xếp đội hình chiến đấu</small>
+                        </span>
+
+                        <span class="feature-arrow">↗</span>
+                    </button>
+
+                    <button
+                            type="button"
+                            class="feature-card"
+                            data-go="inventory"
+                    >
+                        <span class="feature-icon">◈</span>
+
+                        <span class="feature-content">
+                            <strong>Túi đồ</strong>
+                            <small>Quản lý vật phẩm</small>
+                        </span>
+
+                        <span class="feature-arrow">↗</span>
+                    </button>
+
+                </div>
+            </section>
+        </section>
+
+
+        <!-- MÀN HÌNH CHIẾN DỊCH -->
+        <section id="view-campaign" class="game-view">
+
+            <div class="campaign-header">
+                <div>
+                    <span class="eyebrow">
+                        CHƯƠNG I · CON ĐƯỜNG TU ĐẠO
+                    </span>
+
+                    <h2>Vạn dặm nghịch thiên</h2>
+
+                    <p>
+                        Vượt qua thử luyện để mở ra hành trình tiếp theo.
+                    </p>
+                </div>
+
+                <button
+                        type="button"
+                        id="refresh-campaign"
+                        class="button button-outline"
+                >
+                    ↻ Làm mới
+                </button>
+            </div>
+
+            <div
+                    id="campaign-message"
+                    class="message hidden"
+                    role="status"
+            ></div>
+
+            <div id="campaign-list" class="stage-list">
+                <div class="loading-state">
+                    Đang chờ dữ liệu chiến dịch…
+                </div>
+            </div>
+        </section>
+
+
+        <!-- MÀN HÌNH TƯỚNG -->
+        <section id="view-heroes" class="game-view">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">LINH TƯỚNG QUY TỤ</span>
+                    <h2>Tướng lĩnh</h2>
+                </div>
+            </div>
+
+            <div id="heroes-content" class="feature-page-content">
+                <div class="empty-state">
+                    Danh sách tướng sẽ hiển thị tại đây.
+                </div>
+            </div>
+        </section>
+
+
+        <!-- MÀN HÌNH ĐỘI HÌNH -->
+        <section id="view-formation" class="game-view">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">BÀY BINH BỐ TRẬN</span>
+                    <h2>Đội hình chiến đấu</h2>
+                </div>
+            </div>
+
+            <div id="formation-content" class="feature-page-content">
+                <div class="empty-state">
+                    Khu vực đội hình 3×3 sẽ hiển thị tại đây.
+                </div>
+            </div>
+        </section>
+
+
+        <!-- MÀN HÌNH TÚI ĐỒ -->
+        <section id="view-inventory" class="game-view">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">TÀNG BẢO CÁC</span>
+                    <h2>Túi đồ</h2>
+                </div>
+            </div>
+
+            <div id="inventory-content" class="feature-page-content">
+                <div class="empty-state">
+                    Vật phẩm của nhân vật sẽ hiển thị tại đây.
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+
+<!-- HỘP THOẠI CẤU HÌNH API -->
+<div
+        id="settings-modal"
+        class="modal hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="settings-title"
+>
+    <div class="modal-card">
+        <button
+                type="button"
+                class="modal-close"
+                data-close-settings
+                aria-label="Đóng"
+        >
+            ×
+        </button>
+
+        <span class="eyebrow">KẾT NỐI BACKEND</span>
+
+        <h2 id="settings-title">Cấu hình máy chủ</h2>
+
+        <p>
+            Nhập địa chỉ backend Spring Boot đang chạy.
+            Ví dụ: <code>http://localhost:8080</code>
+        </p>
+
+        <label for="api-base-url">API base URL</label>
+        <input
+                id="api-base-url"
+                type="url"
+                placeholder="http://localhost:8080"
+                autocomplete="url"
+        >
+
+        <label for="jwt-token">JWT access token</label>
+        <textarea
+                id="jwt-token"
+                rows="4"
+                placeholder="Dán access token nếu đã đăng nhập"
+        ></textarea>
+
+        <div class="modal-actions">
+            <button
+                    type="button"
+                    class="button button-outline"
+                    data-close-settings
+            >
+                Hủy
+            </button>
+
+            <button
+                    type="button"
+                    id="save-settings"
+                    class="button button-gold"
+            >
+                Lưu cấu hình
+            </button>
+        </div>
+
+        <p class="fine-print">
+            Token được lưu trong localStorage của trình duyệt.
+            Chỉ sử dụng trên thiết bị đáng tin cậy.
+        </p>
+    </div>
+</div>
+
+
+<!-- Chiến trường Canvas -->
+<section id="battle-screen" class="battle-screen hidden">
+    <header class="battle-screen-header">
+        <div>
+            <span class="eyebrow">THIÊN MỆNH · SINH TỬ CHIẾN</span>
+            <h2 id="battle-stage-name">Chiến trường</h2>
+        </div>
+
+        <div class="battle-screen-controls">
+            <span id="battle-turn-label">Chuẩn bị giao chiến</span>
+            <button id="battle-speed-btn" class="button button-outline"
+                    type="button">Tốc độ ×1</button>
+            <button id="battle-skip-btn" class="button button-outline"
+                    type="button">Bỏ qua</button>
+        </div>
+    </header>
+
+    <div id="battle-stage" class="battle-canvas-frame">
+        <canvas id="battle-canvas" aria-label="Chiến trường chiến đấu" role="img"></canvas>
+        <div id="battle-action-caption" class="battle-action-caption">
+            Hai bên chuẩn bị giao chiến
+        </div>
+    </div>
+
+    <!-- KHU VỰC TEST SPINE ĐỘC LẬP -->
+    <div id="spine-debug-stage">
+        <h3>SPINE DEBUG - TEST ANIMATION</h3>
+        <canvas id="battle-spine-canvas"></canvas>
+    </div>
+
+    <div class="battle-screen-footer">
+        <div id="battle-current-action" class="battle-current-action">
+            Đang chờ bắt đầu…
+        </div>
+        <button id="battle-back-btn" class="button button-outline"
+                type="button">Quay lại chiến dịch</button>
+    </div>
+</section>
+
+
+<!-- HỘP THOẠI KẾT QUẢ TRẬN ĐẤU -->
+<div
+        id="battle-modal"
+        class="modal hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="battle-result-title"
+>
+    <div class="modal-card battle-result-card">
+        <button
+                type="button"
+                class="modal-close"
+                data-close-battle
+                aria-label="Đóng"
+        >
+            ×
+        </button>
+
+        <span class="eyebrow">KẾT QUẢ GIAO TRANH</span>
+
+        <h2 id="battle-result-title">Kết quả trận đấu</h2>
+
+        <div id="battle-result-content"></div>
+
+        <div class="modal-actions">
+            <button
+                    type="button"
+                    class="button button-outline"
+                    data-close-battle
+            >
+                Đóng
+            </button>
+
+            <button
+                    type="button"
+                    id="refresh-after-battle"
+                    class="button button-gold"
+            >
+                Cập nhật tiến độ
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- THÔNG BÁO -->
+<div id="game-toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/spine-runtimes@3.5.35/spine-ts/build/spine-webgl.js"></script>
+<script src="./js/SpineCharacterManager.js"></script>
+<script src="./app.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/spine-runtimes@3.5.35/spine-ts/build/spine-webgl.js"></script>
+
+<script>
+    window.addEventListener("error", function (event) {
+        console.error("[GLOBAL ERROR]", event.message, event.filename, event.lineno);
+    });
+</script>
+
+<script
+        src="./js/SpineCharacterManager.js"
+        onload="console.log('[SPINE] Manager script loaded')"
+        onerror="console.error('[SPINE] Không tải được ./js/SpineCharacterManager.js')">
+</script>
+
+<script src="./app.js"></script>
+<script src="./js/spine-debug.js"></script>
+
+<script>
+    (function () {
+        const panel = document.getElementById("spine-diagnostic");
+
+        function inspect() {
+            const spine = window.spine;
+            const lines = [];
+
+            lines.push("=== SPINE RUNTIME DIAGNOSTIC ===");
+            lines.push("");
+            lines.push("Script loaded: " + window.__spineScriptLoaded);
+            lines.push("window.spine: " + typeof spine);
+            lines.push("");
+
+            if (!spine) {
+                lines.push("KHONG TIM THAY window.spine");
+                lines.push("Kiem tra CDN va Network.");
+                panel.textContent = lines.join("\n");
+                return;
+            }
+
+            lines.push("=== ROOT EXPORTS ===");
+            lines.push(Object.keys(spine).join(", "));
+            lines.push("");
+
+            for (const key of ["core", "webgl", "canvas", "player"]) {
+                lines.push("=== " + key.toUpperCase() + " ===");
+
+                const value = spine[key];
+
+                lines.push("Type: " + typeof value);
+                lines.push(
+                    value && typeof value === "object"
+                        ? Object.keys(value).join(", ")
+                        : "(khong co)"
+                );
+                lines.push("");
+            }
+
+            lines.push("=== IMPORTANT CLASSES ===");
+
+            const names = [
+                "SkeletonJson",
+                "SkeletonBinary",
+                "TextureAtlas",
+                "AtlasAttachmentLoader",
+                "Skeleton",
+                "AnimationState",
+                "SceneRenderer",
+                "Matrix4",
+                "AssetManager"
+            ];
+
+            for (const name of names) {
+                lines.push(name + ": " + typeof spine[name]);
+            }
+
+            lines.push("");
+            lines.push("=== WEBGL CONSTRUCTORS ===");
+
+            for (const name of [
+                "SceneRenderer",
+                "AssetManager",
+                "SkeletonRenderer",
+                "ManagedWebGLRenderingContext",
+                "Shader"
+            ]) {
+                lines.push(
+                    name + ": " +
+                    typeof spine.webgl?.[name]
+                );
+            }
+
+            panel.textContent = lines.join("\n");
+        }
+
+        window.addEventListener("load", inspect);
+        setTimeout(inspect, 1000);
+    })();
+</script>
+
+<!-- Authentication Modal -->
+<div
+        id="auth-modal"
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="auth-modal-title"
+>
+    <div class="modal-panel auth-panel">
+        <button
+                type="button"
+                class="modal-close"
+                id="close-auth-modal"
+                aria-label="Đóng cửa sổ đăng nhập"
+        >
+            ×
+        </button>
+
+        <div class="auth-brand">
+            <span class="auth-brand-symbol">✦</span>
+            <h2 id="auth-modal-title">Nghịch Thiên Chiến Ký</h2>
+            <p>Khởi hành con đường nghịch thiên</p>
+        </div>
+
+        <div class="auth-tabs">
+            <button
+                    type="button"
+                    class="auth-tab active"
+                    data-auth-tab="login"
+            >
+                Đăng nhập
+            </button>
+
+            <button
+                    type="button"
+                    class="auth-tab"
+                    data-auth-tab="register"
+            >
+                Đăng ký
+            </button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+            <label for="login-username">Tên đăng nhập</label>
+            <input
+                    id="login-username"
+                    name="username"
+                    type="text"
+                    minlength="4"
+                    maxlength="50"
+                    autocomplete="username"
+                    placeholder="Nhập tên đăng nhập"
+                    required
+            />
+
+            <label for="login-password">Mật khẩu</label>
+            <input
+                    id="login-password"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    placeholder="Nhập mật khẩu"
+                    required
+            />
+
+            <button class="btn btn-primary auth-submit" type="submit">
+                Đăng nhập vào game
+            </button>
+        </form>
+
+        <form id="register-form" class="auth-form" hidden>
+            <label for="register-username">Tên đăng nhập</label>
+            <input
+                    id="register-username"
+                    name="username"
+                    type="text"
+                    minlength="4"
+                    maxlength="50"
+                    pattern="[a-zA-Z0-9_]+"
+                    autocomplete="username"
+                    placeholder="4–50 ký tự, chữ, số hoặc dấu _"
+                    required
+            />
+
+            <label for="register-display-name">Tên nhân vật</label>
+            <input
+                    id="register-display-name"
+                    name="displayName"
+                    type="text"
+                    minlength="2"
+                    maxlength="80"
+                    placeholder="Tên hiển thị trong game"
+                    required
+            />
+
+            <label for="register-email">Email (không bắt buộc)</label>
+            <input
+                    id="register-email"
+                    name="email"
+                    type="email"
+                    maxlength="150"
+                    autocomplete="email"
+                    placeholder="example@email.com"
+            />
+
+            <label for="register-password">Mật khẩu</label>
+            <input
+                    id="register-password"
+                    name="password"
+                    type="password"
+                    minlength="8"
+                    maxlength="72"
+                    autocomplete="new-password"
+                    placeholder="Ít nhất 8 ký tự"
+                    required
+            />
+
+            <button class="btn btn-primary auth-submit" type="submit">
+                Tạo tài khoản
+            </button>
+        </form>
+
+        <p id="auth-message" class="auth-message" role="status"></p>
+
+        <div class="auth-footer">
+            <button
+                    type="button"
+                    id="manual-close-auth"
+                    class="btn btn-secondary"
+            >
+                Đóng cửa sổ
+            </button>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
